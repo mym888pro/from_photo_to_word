@@ -1,0 +1,60 @@
+# qpython_ocr.py - 手机端文字识别
+import androidhelper
+import time
+import os
+
+def mobile_ocr():
+    droid = androidhelper.Android()
+    
+    # 检查Tesseract OCR是否可用
+    try:
+        import pytesseract
+        from PIL import Image
+        tesseract_available = True
+    except ImportError:
+        tesseract_available = False
+    
+    print("手机文字识别工具")
+    print("1. 拍照识别")
+    print("2. 从相册选择图片识别")
+    choice = input("请选择操作(1/2): ")
+    
+    if choice == '1':
+        # 拍照
+        print("准备拍照...")
+        droid.cameraInteractiveCapturePicture('/sdcard/qpython_ocr_temp.jpg')
+        time.sleep(3)  # 等待拍照完成
+        image_path = '/sdcard/qpython_ocr_temp.jpg'
+    elif choice == '2':
+        # 选择图片
+        print("请从相册选择图片...")
+        image_path = droid.pickFile(mimeType='image/*').result
+        if not image_path:
+            print("未选择图片")
+            return
+    else:
+        print("无效选择")
+        return
+    
+    # 识别文字
+    if tesseract_available:
+        try:
+            print("正在识别文字...")
+            text = pytesseract.image_to_string(Image.open(image_path), lang='chi_sim+eng')
+            print("\n识别结果:")
+            print(text)
+            
+            # 询问是否保存结果
+            save = input("\n是否保存识别结果到文件?(y/n): ").lower()
+            if save == 'y':
+                with open('/sdcard/qpython_ocr_result.txt', 'w', encoding='utf-8') as f:
+                    f.write(text)
+                print("结果已保存到 /sdcard/qpython_ocr_result.txt")
+        except Exception as e:
+            print(f"识别出错: {e}")
+    else:
+        print("未安装Tesseract OCR引擎，无法识别文字")
+        print("请安装pytesseract和Pillow库，并确保手机上有Tesseract OCR数据")
+
+if __name__ == '__main__':
+    mobile_ocr()

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>from_photo_to_word - 图片转文字</title>
+    <style>
+        body { font-family: '微软雅黑', Arial, sans-serif; margin: 40px; background: #f9f9f9; color: #333; }
+        h1 { color: #2c3e50; }
+        h2 { color: #2980b9; border-bottom: 1px solid #eee; }
+        ul { line-height: 1.8; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 2px 12px #eee; }
+        a { color: #2980b9; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>from_photo_to_word</h1>
+    <p>图片转文字</p>
+    <p>本项目包含分别针对 QPython（手机）和 IDLE（电脑）的 Python 代码，可将图片中的文字转换为可编辑文本。</p>
+    <h2>QPython（手机版）使用说明:</h2>
+    <ul>
+        <li>在 QPython 中安装所需库：<code>pip install pytesseract pillow</code></li>
+        <li>需要下载 Tesseract OCR 语言数据包（中文+英文）</li>
+        <li>确保给予 QPython 相机和存储权限</li>
+    </ul>
+    <h2>IDLE（电脑版）使用说明:</h2>
+    <ul>
+        <li>安装所需库：<code>pip install pytesseract pillow</code></li>
+        <li>下载并安装 Tesseract OCR：<a href="https://github.com/tesseract-ocr/tesseract" target="_blank">https://github.com/tesseract-ocr/tesseract</a></li>
+        <li>下载中文语言包（chi_sim）</li>
+    </ul>
+    <h2>通用注意事项</h2>
+    <ul>
+        <li>两种版本都需要 Tesseract OCR 引擎支持</li>
+        <li>中文识别需要下载中文语言包（chi_sim）</li>
+        <li>识别准确率取决于图片质量和文字清晰度</li>
+        <li>对于复杂排版或手写文字，识别率可能会降低</li>
+        <li>可以根据需要修改代码，例如添加更多语言支持或调整识别参数</li>
+    </ul>
+</div>
+</body>
+</html>
